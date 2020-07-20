@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="e2e-4Z-8L6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="e2e-4Z-8L6">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Item Feed View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ShoppingList_Diffable" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ItemFeedViewController" customModule="ShoppingList_Diffable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,6 +22,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="116.51785714285714"/>
+        </scene>
+        <!--Add Item View Controller-->
+        <scene sceneID="RQ8-Ca-a2m">
+            <objects>
+                <viewController storyboardIdentifier="AddItemViewController" id="a8k-MG-mBu" customClass="AddItemViewController" customModule="ShoppingList_Diffable" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xhg-sH-iH5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p9b-ey-lTe">
+                                <rect key="frame" x="20" y="84" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aMg-Ai-CMb">
+                                <rect key="frame" x="20" y="158" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVx-jh-Olz">
+                                <rect key="frame" x="40" y="272" width="334" height="30"/>
+                                <state key="normal" title="Add Item to Shopping List"/>
+                                <connections>
+                                    <action selector="didAddItemToShoppingList" destination="a8k-MG-mBu" eventType="touchUpInside" id="tSt-tH-amL"/>
+                                </connections>
+                            </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMe-dn-2Fu">
+                                <rect key="frame" x="0.0" y="362" width="414" height="216"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="aMg-Ai-CMb" firstAttribute="leading" secondItem="Yww-iA-Tme" secondAttribute="leading" constant="20" id="1TA-1n-XQL"/>
+                            <constraint firstItem="wMe-dn-2Fu" firstAttribute="top" secondItem="GVx-jh-Olz" secondAttribute="bottom" constant="60" id="2zV-vq-ueE"/>
+                            <constraint firstItem="GVx-jh-Olz" firstAttribute="leading" secondItem="Yww-iA-Tme" secondAttribute="leading" constant="40" id="86a-ch-5Va"/>
+                            <constraint firstItem="aMg-Ai-CMb" firstAttribute="top" secondItem="p9b-ey-lTe" secondAttribute="bottom" constant="40" id="8XP-bg-QXx"/>
+                            <constraint firstItem="Yww-iA-Tme" firstAttribute="trailing" secondItem="GVx-jh-Olz" secondAttribute="trailing" constant="40" id="Hth-d5-E24"/>
+                            <constraint firstItem="p9b-ey-lTe" firstAttribute="top" secondItem="Yww-iA-Tme" secondAttribute="top" constant="40" id="JFW-7K-mCO"/>
+                            <constraint firstItem="p9b-ey-lTe" firstAttribute="leading" secondItem="Yww-iA-Tme" secondAttribute="leading" constant="20" id="Noi-eV-bzc"/>
+                            <constraint firstItem="Yww-iA-Tme" firstAttribute="trailing" secondItem="p9b-ey-lTe" secondAttribute="trailing" constant="20" id="Y4h-m6-QW2"/>
+                            <constraint firstItem="GVx-jh-Olz" firstAttribute="top" secondItem="aMg-Ai-CMb" secondAttribute="bottom" constant="80" id="brM-qO-sid"/>
+                            <constraint firstItem="wMe-dn-2Fu" firstAttribute="trailing" secondItem="Yww-iA-Tme" secondAttribute="trailing" id="ghd-Hn-dI4"/>
+                            <constraint firstItem="Yww-iA-Tme" firstAttribute="trailing" secondItem="aMg-Ai-CMb" secondAttribute="trailing" constant="20" id="uhy-Ch-kkk"/>
+                            <constraint firstItem="wMe-dn-2Fu" firstAttribute="leading" secondItem="Yww-iA-Tme" secondAttribute="leading" id="xfS-MY-a3x"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Yww-iA-Tme"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameTextField" destination="p9b-ey-lTe" id="BgC-hL-IPg"/>
+                        <outlet property="pickerView" destination="wMe-dn-2Fu" id="Jze-Qv-LS2"/>
+                        <outlet property="priceTextField" destination="aMg-Ai-CMb" id="Owu-MW-oaL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ag7-yX-XiK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1966.6666666666667" y="116.51785714285714"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RmT-LU-fGz">

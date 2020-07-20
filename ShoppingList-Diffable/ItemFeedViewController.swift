@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ItemFeedViewController: UIViewController {
     
     private var tableView: UITableView!
     // private var collectionView: UICollectionView!
@@ -62,14 +62,28 @@ class ViewController: UIViewController {
             snapshot.appendItems(items)
         }
         
-        dataSource.apply(snapshot, animatingDifferences: true)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     @objc private func toggleEditState() {
-        
+        // 1. false  -> 2. true -> 3. false
+            
+            // 1. !isEditing = false -> true
+            // 2. !isEditing = true -> false
+            // 3. !isEditing = false -> true
+            
+            tableView.setEditing(!tableView.isEditing, animated: true)
+            navigationItem.leftBarButtonItem?.title = tableView.isEditing ? "Done" : "Edit"
+            
+        //    if tableView.isEditing {
+        //      navigationItem.leftBarButtonItem?.title = "Done"
+        //    } else {
+        //      navigationItem.leftBarButtonItem?.title = "Edit"
+        //    }
     }
     
     @objc private func presentAddVC()    {
+        
         // TODO:
         // 1. create an AddItemViewController.swift file
         // 2. add a View Controller object in Storyboard
@@ -78,7 +92,32 @@ class ViewController: UIViewController {
         // 5. user is able to add a new item to a given category and click on a submit button
         // 6. use any communication paradigm to get data from AddItemViewController back to the ViewController
         // types: delegate, KVO, notification center, unwind segue, callback, combine
+        guard let addItemVC = storyboard?.instantiateViewController(withIdentifier: "AddItemViewController") as? AddItemViewController else {
+            return
+        }
+        addItemVC.delegate = self
+        present(addItemVC, animated: true)
     }
-
+    
 }
 
+/*
+extension ViewController: AddItemViewControllerDelegate {
+    func didAddItem(item: Item) {
+        var snapshot = dataSource.snapshot()
+        snapshot.appendItems([item], toSection: item.category)
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+*/
+extension ItemFeedViewController: AddItemViewControllerDelegate {
+    func didAddNewItem(_ addItemViewController: AddItemViewController, item: Item) {
+        var snapshot = dataSource.snapshot()
+        snapshot.appendItems([item], toSection: item.category)
+        
+        // no need for reloadData()
+        // no need for property observers
+        // apply snapshot is all we need with diff DS
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
+}
