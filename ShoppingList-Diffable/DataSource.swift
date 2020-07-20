@@ -11,7 +11,12 @@ import UIKit
 // conforms to UITableViewDataSource
 class DataSource: UITableViewDiffableDataSource<Category, Item> {
     
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return Category.allCases[section].rawValue // "Running"
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if Category.allCases[section] == .shoppingCart {
+            return "🛒" + Category.allCases[section].rawValue
+        } else {
+            return Category.allCases[section].rawValue // "Running"
+        }
     }
 }
